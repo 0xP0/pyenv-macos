@@ -106,6 +106,13 @@ source ~/.env-exporter
 pyenv install --patch 2.7.11 < Python-2.7.11-macos.patch
 pyenv install --patch 3.4.10 < Python-3.4.x-macos.patch
 pyenv install --patch 3.6.5 < Python-3.6+-macos.patch
+
+#IF "CHINA"
+#THEN
+export v=2.7.11;pydown $v;pyenv install --patch $v < Python-2.7.11-macos.patch
+export v=3.4.10;pydown $v;pyenv install --patch $v < Python-3.4.x-macos.patch
+export v=3.6.5;pydown $v;pyenv install --patch $v < Python-3.6+-macos.patch
+#ENDIF
 ```
 
 
