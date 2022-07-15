@@ -44,7 +44,7 @@ brew install libzip
 source ~/.env-exporter
 pyenv install --patch 2.7.11 < Python-2.7.11-macos.patch
 pyenv install --patch 3.4.10 < Python-3.4.x-macos.patch
-pyenv install --patch 3.6.5 < Python-3.6+.patch
+pyenv install --patch 3.6.5 < Python-3.6+macos.patch
 ```
 
 
