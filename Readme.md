@@ -109,6 +109,16 @@ pyenv install --patch 3.6.5 < Python-3.6+-macos.patch
 
 #IF "CHINA"
 #THEN
+vim ~/.zshrc or ~/.bashrc add
+
+function pydown() {
+    v=$1
+    echo 'Downloading Python' $v
+    curl -L https://npm.taobao.org/mirrors/python/$v/Python-$v.tar.xz -o ~/.pyenv/cache/Python-$v.tar.xz
+}
+
+source ~/.zshrc
+
 export v=2.7.11;pydown $v;pyenv install --patch $v < Python-2.7.11-macos.patch
 export v=3.4.10;pydown $v;pyenv install --patch $v < Python-3.4.x-macos.patch
 export v=3.6.5;pydown $v;pyenv install --patch $v < Python-3.6+-macos.patch
