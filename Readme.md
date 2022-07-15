@@ -41,8 +41,7 @@ brew install sqlite
 brew install bzip2
 brew install libiconv
 brew install libzip
-CFLAGS="-I$(brew --prefix openssl)/include -I$(brew --prefix bzip2)/include -I$(brew --prefix readline)/include -I$(xcrun --show-sdk-path)/usr/include"
-LDFLAGS="-L$(brew --prefix openssl)/lib -L$(brew --prefix readline)/lib -L$(brew --prefix zlib)/lib -L$(brew --prefix bzip2)/lib"
+source ~/.env-exporter
 pyenv install --patch 2.7.11 < Python-2.7.11-macos.patch
 pyenv install --patch 3.4.10 < Python-3.4.x-macos.patch
 pyenv install --patch 3.6.5 < Python-3.6+.patch
