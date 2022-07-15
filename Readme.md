@@ -34,6 +34,38 @@ make: *** [Modules/posixmodule.o] Error 1
 make: *** Waiting for unfinished jobs....
 ```
 
+### IF "ERROR The Python ssl extension was not compiled. Missing the OpenSSL lib?"
+```bash
+python-build: use readline from homebrew
+python-build: use zlib from xcode sdk
+ERROR: The Python ssl extension was not compiled. Missing the OpenSSL lib?
+
+Please consult to the Wiki page to fix the problem.
+https://github.com/pyenv/pyenv/wiki/Common-build-problems
+
+
+BUILD FAILED (OS X 11.4 using python-build 1.2.16-5-g7097f820)
+
+```
+### THEN
+reinstall openssl
+
+```bash
+brew reinstall openssl
+
+Error: /usr/local/opt/openssl@3 is not a valid keg
+
+
+cd /usr/local/opt/
+mv openssl@3 openssl@3_old
+brew reinstall openssl
+
+```
+### ENDIF
+
+
+
+
 ### use patch install
 ```bash
 brew install zlib
