@@ -83,12 +83,17 @@ reinstall openssl
 ```bash
 brew reinstall openssl
 # IF 
-Error: /usr/local/opt/openssl@3 is not a valid keg
+Error: /usr/local/opt/openssl@1.1 is not a valid keg
 # ELSE
 cd /usr/local/opt/
-mv openssl@3 openssl@3_old
+mv openssl@1.1 openssl@1.1_old
 brew reinstall openssl
 # ENDIF
+```
+
+```bash
+cd {your Python-2.7.11-macos.patch path}
+PYTHON_BUILD_HOMEBREW_OPENSSL_FORMULA=openssl@1.1 pyenv install --patch 2.7.11 < Python-2.7.11-macos.patch 
 ```
 ### ENDIF
 
