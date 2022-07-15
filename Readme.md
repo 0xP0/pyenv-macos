@@ -1,5 +1,6 @@
 ### Problems installing python  with pyenv on Mac OS Big Sur
-
+---
+### IF "ERROR: getentropy"
 ```bash
 Python/random.c:89:19: note: did you mean 'py_getentropy'?
 Python/random.c:81:1: note: 'py_getentropy' declared here
@@ -12,6 +13,18 @@ Python/random.c:98:19: error: implicit declaration of function 'getentropy' is i
 make: *** [Python/random.o] Error 1
 make: *** Waiting for unfinished jobs....
 ```
+### THEN edit Python/random.c add 
+```bash
+#if defined(HAVE_GETRANDOM) || defined(HAVE_GETENTROPY)
+#include <sys/random.h>
+#endif
+```
+
+### ENDIF
+
+-----
+
+### IF "ERROR: ret = sendfile(in, out, offset, &sbytes, &sf, flags); "
 ```bash
 python-build: use readline from homebrew
 python-build: use zlib from xcode sdk
@@ -33,8 +46,25 @@ Last 10 log lines:
 make: *** [Modules/posixmodule.o] Error 1
 make: *** Waiting for unfinished jobs....
 ```
+### TEHN
+edit configure
 
-### IF "ERROR The Python ssl extension was not compiled. Missing the OpenSSL lib?"
+```bash
+-  Darwin/1[0-9].*)
++  Darwin/[12][0-9].*)
+
+```
+edit configure.ac
+
+```bash
+-  Darwin/1@<:@0-9@:>@.*)
++  Darwin/@<:@[12]@:>@@<:@0-9@:>@.*)
+```
+
+### ENDIF
+
+----
+### IF "ERROR:- The Python ssl extension was not compiled. Missing the OpenSSL lib?"
 ```bash
 python-build: use readline from homebrew
 python-build: use zlib from xcode sdk
@@ -52,14 +82,13 @@ reinstall openssl
 
 ```bash
 brew reinstall openssl
-
+# IF 
 Error: /usr/local/opt/openssl@3 is not a valid keg
-
-
+# ELSE
 cd /usr/local/opt/
 mv openssl@3 openssl@3_old
 brew reinstall openssl
-
+# ENDIF
 ```
 ### ENDIF
 
@@ -76,7 +105,7 @@ brew install libzip
 source ~/.env-exporter
 pyenv install --patch 2.7.11 < Python-2.7.11-macos.patch
 pyenv install --patch 3.4.10 < Python-3.4.x-macos.patch
-pyenv install --patch 3.6.5 < Python-3.6+macos.patch
+pyenv install --patch 3.6.5 < Python-3.6+-macos.patch
 ```
 
 
