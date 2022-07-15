@@ -45,4 +45,9 @@ CFLAGS="-I$(brew --prefix openssl)/include -I$(brew --prefix bzip2)/include -I$(
 LDFLAGS="-L$(brew --prefix openssl)/lib -L$(brew --prefix readline)/lib -L$(brew --prefix zlib)/lib -L$(brew --prefix bzip2)/lib"
 pyenv install --patch 2.7.11 < Python-2.7.11-macos.patch
 pyenv install --patch 3.4.10 < Python-3.4.x-macos.patch
+pyenv install --patch 3.6.5 < configure.patch
 ```
+
+
+### Reference documentation
+https://koji-kanao.medium.com/install-python-3-7-3-6-and-3-5-on-bigsure-with-pyenv-21194becd2fe
