@@ -78,26 +78,26 @@ BUILD FAILED (OS X 11.4 using python-build 1.2.16-5-g7097f820)
 
 ```
 ### THEN
-reinstall openssl
+reinstall openssl@1.1
 
 ```bash
 brew reinstall openssl
 # IF 
-Error: /usr/local/opt/openssl@1.1 is not a valid keg
+Error: /usr/local/opt/openssl@3 is not a valid keg
 # ELSE
 cd /usr/local/opt/
-mv openssl@1.1 openssl@1.1_old
+mv openssl@3 openssl@3_old
 brew reinstall openssl
 # ENDIF
 ```
-
+#IF also ERROR  
+Don't use brew openssl 
+Build other verison openssl by pyenv, eg:openssl@1.0  pyenv will download and build 
 ```bash
 cd {your Python-2.7.11-macos.patch path}
-PYTHON_BUILD_HOMEBREW_OPENSSL_FORMULA=openssl@1.1 pyenv install --patch 2.7.11 < Python-2.7.11-macos.patch 
+PYTHON_BUILD_HOMEBREW_OPENSSL_FORMULA=openssl@1.0 pyenv install --patch 2.7.11 < Python-2.7.11-macos.patch 
 ```
 ### ENDIF
-
-
 
 
 ### use patch install
@@ -129,7 +129,6 @@ export v=3.4.10;pydown $v;pyenv install --patch $v < Python-3.4.x-macos.patch
 export v=3.6.5;pydown $v;pyenv install --patch $v < Python-3.6+-macos.patch
 #ENDIF
 ```
-
 
 ### Reference documentation
 https://koji-kanao.medium.com/install-python-3-7-3-6-and-3-5-on-bigsure-with-pyenv-21194becd2fe
