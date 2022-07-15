@@ -1,0 +1,47 @@
+diff --git a/Python/random.c b/Python/random.c
+index 93d300d..396041d 100644
+--- a/Python/random.c
++++ b/Python/random.c
+@@ -3,6 +3,9 @@
+ #include <windows.h>
+ #else
+ #include <fcntl.h>
++#if defined(HAVE_GETRANDOM) || defined(HAVE_GETENTROPY)
++#include <sys/random.h>
++#endif
+ #ifdef HAVE_SYS_STAT_H
+ #include <sys/stat.h>
+ #endif
+ diff --git a/Misc/NEWS.d/next/macOS/2020-06-24-13-51-57.bpo-41100.mcHdc5.rst b/Misc/NEWS.d/next/macOS/2020-06-24-13-51-57.bpo-41100.mcHdc5.rst
+new file mode 100644
+index 0000000000000..ded66b567a92d
+--- /dev/null
++++ b/Misc/NEWS.d/next/macOS/2020-06-24-13-51-57.bpo-41100.mcHdc5.rst
+@@ -0,0 +1 @@
++Support macOS 11 when building.
+diff --git a/configure b/configure
+index c51f396824b63..5024860ca4395 100755
+--- a/configure
++++ b/configure
+@@ -3426,7 +3426,7 @@ $as_echo "#define _BSD_SOURCE 1" >>confdefs.h
+   # has no effect, don't bother defining them
+   Darwin/[6789].*)
+     define_xopen_source=no;;
+-  Darwin/1[0-9].*)
++  Darwin/[12][0-9].*)
+     define_xopen_source=no;;
+   # On AIX 4 and 5.1, mbstate_t is defined only when _XOPEN_SOURCE == 500 but
+   # used in wcsnrtombs() and mbsnrtowcs() even if _XOPEN_SOURCE is not defined
+diff --git a/configure.ac b/configure.ac
+index 70deefb6b9aea..5a3e340aa3e72 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -510,7 +510,7 @@ case $ac_sys_system/$ac_sys_release in
+   # has no effect, don't bother defining them
+   Darwin/@<:@6789@:>@.*)
+     define_xopen_source=no;;
+-  Darwin/1@<:@0-9@:>@.*)
++  Darwin/@<:@[12]@:>@@<:@0-9@:>@.*)
+     define_xopen_source=no;;
+   # On AIX 4 and 5.1, mbstate_t is defined only when _XOPEN_SOURCE == 500 but
+   # used in wcsnrtombs() and mbsnrtowcs() even if _XOPEN_SOURCE is not defined

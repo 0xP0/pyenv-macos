@@ -1,0 +1,48 @@
+### Problems installing python  with pyenv on Mac OS Big Sur
+
+```bash
+Python/random.c:89:19: note: did you mean 'py_getentropy'?
+Python/random.c:81:1: note: 'py_getentropy' declared here
+py_getentropy(unsigned char *buffer, Py_ssize_t size, int fatal)
+^
+Python/random.c:98:19: error: implicit declaration of function 'getentropy' is invalid in C99 [-Werror,-Wimplicit-function-declaration]
+            res = getentropy(buffer, len);
+                  ^
+2 errors generated.
+make: *** [Python/random.o] Error 1
+make: *** Waiting for unfinished jobs....
+```
+```bash
+python-build: use readline from homebrew
+python-build: use zlib from xcode sdk
+
+BUILD FAILED (OS X 11.3 using python-build 20180424)
+
+Inspect or clean up the working tree at /var/folders/7j/0qtpb8vs1_s34ynv0f6rrs840000gn/T/python-build.20210304114832.65954
+Results logged to /var/folders/7j/0qtpb8vs1_s34ynv0f6rrs840000gn/T/python-build.20210304114832.65954.log
+
+Last 10 log lines:
+./Modules/posixmodule.c:8210:15: error: implicit declaration of function 'sendfile' is invalid in C99 [-Werror,-Wimplicit-function-declaration]
+        ret = sendfile(in, out, offset, &sbytes, &sf, flags);
+              ^
+./Modules/posixmodule.c:10432:5: warning: code will never be executed [-Wunreachable-code]
+    Py_FatalError("abort() called from Python code didn't abort!");
+    ^~~~~~~~~~~~~
+1 warning and 1 error generated.
+1 warning generated.
+make: *** [Modules/posixmodule.o] Error 1
+make: *** Waiting for unfinished jobs....
+```
+
+### use patch install
+```bash
+brew install zlib
+brew install sqlite
+brew install bzip2
+brew install libiconv
+brew install libzip
+CFLAGS="-I$(brew --prefix openssl)/include -I$(brew --prefix bzip2)/include -I$(brew --prefix readline)/include -I$(xcrun --show-sdk-path)/usr/include"
+LDFLAGS="-L$(brew --prefix openssl)/lib -L$(brew --prefix readline)/lib -L$(brew --prefix zlib)/lib -L$(brew --prefix bzip2)/lib"
+pyenv install --patch 2.7.11 < Python-2.7.11-macos.patch
+pyenv install --patch 3.4.10 < Python-3.4.x-macos.patch
+```
