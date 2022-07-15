@@ -92,10 +92,20 @@ brew reinstall openssl
 ```
 #IF also ERROR  
 Don't use brew openssl 
-Build other verison openssl by pyenv, eg:openssl@1.0  pyenv will download and build 
+
+Build other verison openssl by pyenv
+
+eg:
+	openssl@1.0  pyenv will download and build 
+
 ```bash
 cd {your Python-2.7.11-macos.patch path}
 PYTHON_BUILD_HOMEBREW_OPENSSL_FORMULA=openssl@1.0 pyenv install --patch 2.7.11 < Python-2.7.11-macos.patch 
+
+Downloading openssl-1.0.2k.tar.gz...
+-> https://pyenv.github.io/pythons/6b3977c61f2aedf0f96367dcfb5c6e578cf37e7b8d913b4ecb6643c3cb88d8c0
+Installing openssl-1.0.2k...
+Installed openssl-1.0.2k to /Users/chenlu/.pyenv/versions/2.7.11
 ```
 ### ENDIF
 
